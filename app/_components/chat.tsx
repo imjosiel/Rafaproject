@@ -14,7 +14,7 @@ export default function Chat() {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const chatRef = useRef(null);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   const groqClient = new Groq({
     apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
@@ -47,7 +47,7 @@ export default function Chat() {
           "message" in error &&
           typeof error.message === "string"
         ) {
-          const err = error;
+          const err = error as { message: string };
           console.error("Erro ao obter resposta do chatbot:", err.message);
           const errorMessage = err.message.includes("Resposta vazia")
             ? "Não foi possível obter uma resposta válida no momento."
